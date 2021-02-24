@@ -1,22 +1,18 @@
 package pages;
 
-import Helper.Helper;
-import org.junit.rules.Timeout;
+import helper.Helper;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class HomePage {
 
     WebDriver driver;
     Helper helper;
     JavascriptExecutor executor;
-
     List <String> overlapNames;
     List <Integer> overlapWidgets;
 
@@ -40,7 +36,6 @@ public class HomePage {
 
     @FindBy(xpath = "//div[@class='linkbox margin-bottom-20']")
     List<WebElement> widgetBoxes;
-
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
