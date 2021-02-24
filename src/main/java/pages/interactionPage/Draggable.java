@@ -27,7 +27,19 @@ public class Draggable extends InteractionBase{
     @FindBy (xpath = "//li[@class='ui-state-highlight ui-draggable ui-draggable-handle ui-sortable-helper']")
     private WebElement draggableCopy;
 
-    public Draggable draDefaultFunctionality() {
+    @FindBy (xpath = "//ul[@id='sortable']/li2")
+    private WebElement ELEMENT;
+
+    @FindBy (xpath = "//ul[@id='sortable']/li3")
+    private WebElement ELEMENT2;
+
+    @FindBy (xpath = "//ul[@id='sortable']/li4")
+    private WebElement ELEMENT3;
+
+    @FindBy (xpath = "//ul[@id='sortable']/li5")
+    private WebElement ELEMENT4;
+
+    public Draggable dra1DefaultFunctionality() {
         openWidget(1);
         driver.switchTo().frame(0);
         dragElementAndTakeScreenshot(draggableElement1,430,300);
@@ -37,7 +49,7 @@ public class Draggable extends InteractionBase{
         return this;
     }
 
-    public Draggable draConstrainMovement() {
+    public Draggable dra2ConstrainMovement() {
        switchWidget(2);
         dragElementAndTakeScreenshot(draggableElement1,0,300);
         dragElementAndTakeScreenshot(draggableElement2,800,0);
@@ -47,7 +59,7 @@ public class Draggable extends InteractionBase{
         return this;
     }
 
-    public List<String> draEvenets() {
+    public List<String> dra3Evenets() {
         switchWidget(4);
         dragElementAndTakeScreenshot(draggableElement1,430,300);
         dragElementAndTakeScreenshot(draggableElement1,430,-300);
@@ -58,13 +70,13 @@ public class Draggable extends InteractionBase{
         return labelValues;
     }
 
-    public Draggable draDraggableSortable() {
+    public Draggable dra4DraggableSortable() {
         switchWidget(5);
         dragElementAndTakeScreenshot(draggableElement1, 0, 50);
+        dragElementAndTakeScreenshot(ELEMENT, ELEMENT2);
+        dragElementAndTakeScreenshot(ELEMENT2, ELEMENT3);
+        dragElementAndTakeScreenshot(ELEMENT3, ELEMENT4);
         dragElementAndTakeScreenshot(draggableCopy, 0, 50);
-        dragElementAndTakeScreenshot(draggableCopy, 0, 50);
-        dragElementAndTakeScreenshot(draggableCopy, 0, 55);
-        dragElementAndTakeScreenshot(draggableCopy, 0, 55);
         return this;
     }
 

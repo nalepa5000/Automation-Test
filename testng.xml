@@ -1,0 +1,16 @@
+<suite name = "Suite">
+    <test name = "HomePaheTest">
+        <classes>
+            <class name = "tests.HomePageTests">
+
+            </class>
+        </classes>
+    </test>
+    <test name = "InteractionPageTest">
+        <classes>
+            <class name = "tests.InteractionPageTest">
+
+            </class>
+        </classes>
+    </test>
+</suite>
