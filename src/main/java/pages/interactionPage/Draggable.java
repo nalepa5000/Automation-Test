@@ -27,17 +27,6 @@ public class Draggable extends InteractionBase{
     @FindBy (xpath = "//li[@class='ui-state-highlight ui-draggable ui-draggable-handle ui-sortable-helper']")
     private WebElement draggableCopy;
 
-    @FindBy (xpath = "//ul[@id='sortable']/li2")
-    private WebElement ELEMENT;
-
-    @FindBy (xpath = "//ul[@id='sortable']/li3")
-    private WebElement ELEMENT2;
-
-    @FindBy (xpath = "//ul[@id='sortable']/li4")
-    private WebElement ELEMENT3;
-
-    @FindBy (xpath = "//ul[@id='sortable']/li5")
-    private WebElement ELEMENT4;
 
     public Draggable dra1DefaultFunctionality() {
         openWidget(1);
@@ -59,24 +48,23 @@ public class Draggable extends InteractionBase{
         return this;
     }
 
-    public List<String> dra3Evenets() {
+    public Draggable dra3Evenets() {
         switchWidget(4);
         dragElementAndTakeScreenshot(draggableElement1,430,300);
         dragElementAndTakeScreenshot(draggableElement1,430,-300);
         dragElementAndTakeScreenshot(draggableElement1,-430,150);
-        labelValues.add(draggableElement1.getText());
-        labelValues.add(draggableElement2.getText());
-        labelValues.add(draggableElement3.getText());
-        return labelValues;
+        System.out.println("Start label: " + startLabel.getText());
+        System.out.println("Drag label: " + dragLabel.getText());
+        System.out.println("Stop label: " + stopLabel.getText());
+        driver.switchTo().defaultContent();
+        return this;
     }
 
     public Draggable dra4DraggableSortable() {
         switchWidget(5);
         dragElementAndTakeScreenshot(draggableElement1, 0, 50);
-        dragElementAndTakeScreenshot(ELEMENT, ELEMENT2);
-        dragElementAndTakeScreenshot(ELEMENT2, ELEMENT3);
-        dragElementAndTakeScreenshot(ELEMENT3, ELEMENT4);
         dragElementAndTakeScreenshot(draggableCopy, 0, 50);
+        driver.switchTo().defaultContent();
         return this;
     }
 

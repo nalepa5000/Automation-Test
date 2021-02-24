@@ -14,7 +14,7 @@ import java.util.List;
 
 public class InteractionPageTest extends Base {
 
-    List<String>amoundOfMoves;
+    List<Integer>amoundOfMoves;
     List<String>targetElementText;
 
     @Test
@@ -23,11 +23,9 @@ public class InteractionPageTest extends Base {
         Droppable droppableInteraction = new Droppable(driver);
         draggableInteraction.logIn();
         draggableInteraction.dra1DefaultFunctionality()
-                .dra2ConstrainMovement();
-        amoundOfMoves = draggableInteraction.dra3Evenets();
-        Assert.assertEquals(amoundOfMoves.get(0),2);
-        Assert.assertEquals(amoundOfMoves.get(1),2);
-        Assert.assertEquals(amoundOfMoves.get(2),2);
+                .dra2ConstrainMovement()
+                .dra3Evenets();
+
         droppableInteraction.droDefaultFunctionality();
         targetElementText = droppableInteraction.droAccept();
         Assert.assertEquals(targetElementText.get(0), "accept: '#draggable'");

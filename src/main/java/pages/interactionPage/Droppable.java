@@ -21,9 +21,7 @@ public class Droppable extends InteractionBase{
     }
 
     public Droppable droDefaultFunctionality() {
-        actions.moveToElement(interactionMenu).build().perform();
-        helper.fluentWaitForElement(interactionMenu.findElement(By.xpath(".//li[2]")));
-        actions.click(interactionMenu.findElement(By.xpath(".//li[2]"))).build().perform();
+        openWidget(2);
         driver.switchTo().frame(0);
         dragElementAndTakeScreenshot(draggableElement1, droppableElement1);
         driver.switchTo().defaultContent();

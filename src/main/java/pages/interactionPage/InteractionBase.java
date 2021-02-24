@@ -85,6 +85,7 @@ public class InteractionBase {
 
     void openWidget(int x){
         actions.moveToElement(interactionMenu).build().perform();
+        helper.fluentWaitForElement(interactionMenu.findElement(By.xpath(".//li["+x+"]")));
         actions.click(interactionMenu.findElement(By.xpath(".//li["+x+"]"))).build().perform();
     }
 
