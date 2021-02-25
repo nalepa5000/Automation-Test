@@ -2,6 +2,7 @@ package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
@@ -24,5 +25,10 @@ public class Base {
     public void down(){
         System.out.println("TEST - end");
         driver.quit();
+    }
+
+    @AfterMethod
+    public void switchToDefault(){
+        driver.switchTo().defaultContent();
     }
 }

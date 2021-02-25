@@ -2,11 +2,15 @@ package pages.interactionPage;
 
 import helper.Helper;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchFrameException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterMethod;
+
+import java.time.Duration;
 
 public class InteractionBase {
 
@@ -66,11 +70,14 @@ public class InteractionBase {
         helper.takeScreenshot();
     }
 
-    void switchWidget(int widget) {
+    public void switchWidget(int widget) {
         actions.moveToElement(buttonsBar.findElement(By.xpath(".//li["+widget+"]"))).build().perform();
         buttonsBar.findElement(By.xpath(".//li["+widget+"]")).click();
-        driver.switchTo().frame(widget-1);
-        helper.fluentWaitForElement(draggableElement1);
+        try {
+            driver.switchTo().frame(widget - 1);
+        }catch(NoSuchFrameException e) {
+            System.out.println(e.fillInStackTrace());
+        };
     }
 
     public void logIn() throws InterruptedException {
@@ -83,10 +90,14 @@ public class InteractionBase {
         Thread.sleep(3000);
     }
 
-    void openWidget(int x){
+    public void openWidget(int x){
         actions.moveToElement(interactionMenu).build().perform();
         helper.fluentWaitForElement(interactionMenu.findElement(By.xpath(".//li["+x+"]")));
         actions.click(interactionMenu.findElement(By.xpath(".//li["+x+"]"))).build().perform();
+    }
+
+    public int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
     }
 
 }

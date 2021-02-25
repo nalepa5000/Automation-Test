@@ -32,9 +32,10 @@ public class Helper {
 
     public void fluentWaitForElement(WebElement webElement) {
         FluentWait<WebDriver> wait = new FluentWait<>(driver);
-        wait.withTimeout(Duration.ofSeconds(5L))
+        wait.withTimeout(Duration.ofSeconds(10L))
                 .pollingEvery(Duration.ofMillis(1000))
                 .ignoring(NoSuchElementException.class)
+                .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.visibilityOf(webElement));
     }
 
@@ -54,15 +55,16 @@ public class Helper {
                 .until(ExpectedConditions.visibilityOfAllElements(list));
     }
 
-    public boolean retryingFindElementGetText(WebElement element, By by) {
+    public boolean retryingFindElement(By by) {
         boolean result = false;
         int attempts = 0;
         while (attempts < 3) {
             try {
-                element.findElement(by).getText();
+                driver.findElement(by);
                 result = true;
                 break;
             } catch (StaleElementReferenceException e) {
+                System.out.println(e.fillInStackTrace());
             }
             attempts++;
         }

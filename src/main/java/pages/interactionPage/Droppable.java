@@ -21,7 +21,6 @@ public class Droppable extends InteractionBase{
     }
 
     public Droppable droDefaultFunctionality() {
-        openWidget(2);
         driver.switchTo().frame(0);
         dragElementAndTakeScreenshot(draggableElement1, droppableElement1);
         driver.switchTo().defaultContent();
@@ -34,6 +33,7 @@ public class Droppable extends InteractionBase{
         listDroppableElements.add(droppableElement1.getText());
         dragElementAndTakeScreenshot(draggableElement1,droppableElement1);
         listDroppableElements.add(droppableElement1.getText());
+        driver.switchTo().defaultContent();
         return listDroppableElements;
     }
 

@@ -1,18 +1,22 @@
 package pages.interactionPage;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Draggable extends InteractionBase{
 
     public List<String> labelValues;
+    Random random;
 
     public Draggable(WebDriver driver) {
         super(driver);
         this.labelValues = new ArrayList<String>();
+        random = new Random();
     }
 
     @FindBy(xpath = "//div/ul/li[1]/span[2]")
@@ -28,12 +32,26 @@ public class Draggable extends InteractionBase{
     private WebElement draggableCopy;
 
 
-    public Draggable dra1DefaultFunctionality() {
-        openWidget(1);
+    public Draggable dra1DefaultFunctionality(int amound, int minPx, int maxPx) {
         driver.switchTo().frame(0);
-        dragElementAndTakeScreenshot(draggableElement1,430,300);
-        dragElementAndTakeScreenshot(draggableElement1,430,-300);
-        dragElementAndTakeScreenshot(draggableElement1,-430,150);
+        for (int i = 0; i < amound; i++) {
+            try {
+                dragElementAndTakeScreenshot(draggableElement1,getRandomNumber(minPx,maxPx),getRandomNumber(minPx,maxPx));
+            }catch (MoveTargetOutOfBoundsException e){
+                System.out.println(e.fillInStackTrace());
+            }
+        }
+        driver.switchTo().defaultContent();
+        return this;
+    }
+
+    public Draggable dra1DefaultFunctionality(int xOffset, int yOffset){
+        driver.switchTo().frame(0);
+        try {
+            dragElementAndTakeScreenshot(draggableElement1,xOffset,yOffset);
+        } catch (MoveTargetOutOfBoundsException e){
+            System.out.println(e.fillInStackTrace());
+        }
         driver.switchTo().defaultContent();
         return this;
     }
