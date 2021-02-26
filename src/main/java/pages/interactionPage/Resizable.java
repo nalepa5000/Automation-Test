@@ -13,10 +13,10 @@ public class Resizable extends InteractionBase{
         super(driver);
     }
 
-    public Resizable resDefaultFunctionality() {
+    public Resizable resDefaultFunctionality(int xOffset, int yOffset) {
         driver.switchTo().frame(0);
         actions.clickAndHold(resizableButton)
-                .moveToElement(resizableButton,300,140)
+                .moveByOffset(xOffset,yOffset)
                 .release()
                 .build().perform();
         helper.takeScreenshot();

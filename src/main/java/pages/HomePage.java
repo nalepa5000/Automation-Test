@@ -4,7 +4,6 @@ import helper.Helper;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +30,14 @@ public class HomePage {
     @FindBy(xpath = "//div[@id='login']/form//input[@class='button']")
     WebElement signInButton2;
 
-    @FindBy(xpath = "//u1[@clas='boxed_style block']")
-    WebElement interactionSection;
+    @FindBy(xpath = "//div[@class='container row']/div[2]/ul/li[1]")
+    WebElement phoneNumber;
+
+    @FindBy(xpath = "//div[@class='container row']/div[2]/ul/li[2]")
+    WebElement email;
+
+    @FindBy(xpath = "//div[@class='container row']/div[2]/ul/li[3]")
+    WebElement skype;
 
     @FindBy(xpath = "//div[@class='linkbox margin-bottom-20']")
     List<WebElement> widgetBoxes;
@@ -42,6 +47,8 @@ public class HomePage {
         PageFactory.initElements(driver, this);
         this.helper = new Helper(driver);
         this.executor = (JavascriptExecutor) driver;
+        this.overlapNames = new ArrayList<>();
+        this.overlapWidgets = new ArrayList<>();
     }
 
     public HomePage logIn() throws InterruptedException {
@@ -55,15 +62,40 @@ public class HomePage {
         return this;
     }
 
+    public String getPhoneNumber() {
+        String phoneNumberText;
+        helper.fluentWaitForElement(phoneNumber);
+        phoneNumberText = phoneNumber.getText();
+        return phoneNumberText;
+    }
+
+    public String getEmail() {
+        String emailText;
+        helper.fluentWaitForElement(email);
+        emailText = email.getText();
+        return emailText;
+    }
+
+    public String getSkype() {
+        String skypeText;
+        helper.fluentWaitForElement(skype);
+        skypeText = skype.getText();
+        return skypeText;
+    }
+
+
+
     public List<String> overlapNames(){
-        overlapNames = new ArrayList<>();
-        String name = "";
+        String name;
+        int attemps;
         for (WebElement widgetBox : widgetBoxes){
+            attemps = 0;
             executor.executeScript("window.scrollBy(0,500)");
             helper.fluentWaitForElement(widgetBox);
             name = widgetBox.findElement(By.cssSelector("h1")).getText();
-            while(name == ""){
+            while(name.isEmpty() || attemps != 3){
                 name = widgetBox.findElement(By.cssSelector("h1")).getText();
+                attemps++;
             }
             overlapNames.add(name);
         }
@@ -72,11 +104,9 @@ public class HomePage {
 
     public List<Integer> countOverlapWidgets(){
         executor.executeScript("window.scrollTo(0,0)");
-        overlapWidgets = new ArrayList<>();
         for (WebElement widgetBox : widgetBoxes){
             executor.executeScript("window.scrollBy(0,500)");
-            helper.fluentWaitForElement(widgetBox);
-            helper.retryingFindElementGetSize(widgetBox, By.xpath(".//li"));
+            overlapWidgets.add(widgetBox.findElements(By.xpath("./ul/li")).size());
         }
         return overlapWidgets;
     }

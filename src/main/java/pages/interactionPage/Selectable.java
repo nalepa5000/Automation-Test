@@ -3,8 +3,6 @@ package pages.interactionPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Selectable extends InteractionBase {
@@ -13,9 +11,6 @@ public class Selectable extends InteractionBase {
 
     @FindBy(xpath = "//body/ol[@id='selectable']/li")
     List<WebElement>listSelectableElements;
-
-    @FindBy(xpath = "//iframe[@src='selectable/default.html']")
-    WebElement frame;
 
     @FindBy(id = "select-result")
     WebElement selectResults;
@@ -30,7 +25,7 @@ public class Selectable extends InteractionBase {
             listSelectableElement.click();
             helper.takeScreenshot();
         }
-       // driver.switchTo().defaultContent();
+        driver.switchTo().defaultContent();
         return this;
     }
 
@@ -40,13 +35,14 @@ public class Selectable extends InteractionBase {
             element.click();
             helper.takeScreenshot();
         });
-        //driver.switchTo().defaultContent();
+        driver.switchTo().defaultContent();
         return this;
     }
 
-    public String selSerialize() {
+    public String selSerialize(int fromElement, int toElement) {
         switchWidget(3);
-        actions.dragAndDrop(listSelectableElements.get(0), listSelectableElements.get(5)).build().perform();
+        actions.dragAndDrop(listSelectableElements.get(fromElement),
+                listSelectableElements.get(toElement)).build().perform();
         helper.takeScreenshot();
         selectResultsText = selectResults.getText();
         driver.switchTo().defaultContent();
