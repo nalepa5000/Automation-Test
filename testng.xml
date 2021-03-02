@@ -13,4 +13,11 @@
             </class>
         </classes>
     </test>
+    <test name = "RegistrationPageTest">
+        <classes>
+            <class name= "tests.RegistrationPageTest">
+
+            </class>
+        </classes>
+    </test>
 </suite>

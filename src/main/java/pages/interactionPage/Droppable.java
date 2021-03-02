@@ -3,16 +3,23 @@ package pages.interactionPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.Base;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Droppable extends InteractionBase{
+public class Droppable extends Base {
 
     List <String> listDroppableElements;
 
     @FindBy(id = "draggable-nonvalid")
     WebElement drggableElement;
+
+    @FindBy(id = "draggable")
+    WebElement draggableElement1;
+
+    @FindBy(id = "droppable")
+    WebElement droppableElement1;
 
     public Droppable(WebDriver driver) {
         super(driver);
@@ -20,7 +27,7 @@ public class Droppable extends InteractionBase{
     }
 
     public Droppable droDefaultFunctionality() {
-        driver.switchTo().frame(0);
+        switchWidget(1);
         dragElementAndTakeScreenshot(draggableElement1, droppableElement1);
         driver.switchTo().defaultContent();
         return this;
@@ -35,5 +42,18 @@ public class Droppable extends InteractionBase{
         driver.switchTo().defaultContent();
         return listDroppableElements;
     }
+
+    void dragElementAndTakeScreenshot(WebElement element, int xOffset, int yOffset) {
+        helper.fluentWaitForElement(element);
+        actions.dragAndDropBy(element,xOffset,yOffset).build().perform();
+        helper.takeScreenshot();
+    }
+
+    void dragElementAndTakeScreenshot(WebElement element,WebElement target) {
+        helper.fluentWaitForElement(element);
+        actions.dragAndDrop(element, target).build().perform();
+        helper.takeScreenshot();
+    }
+
 
 }

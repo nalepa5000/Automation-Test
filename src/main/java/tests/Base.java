@@ -24,7 +24,7 @@ public class Base {
     @AfterTest
     public void down(){
         System.out.println("TEST - end");
-        driver.quit();
+        //driver.quit();
     }
 
     @AfterMethod

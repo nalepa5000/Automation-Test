@@ -3,12 +3,21 @@ package pages.interactionPage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
 import org.openqa.selenium.support.FindBy;
+import pages.Base;
 
-public class Draggable extends InteractionBase{
+public class Draggable extends Base {
 
-    public Draggable(WebDriver driver) {
-        super(driver);
-    }
+    @FindBy(id = "draggable")
+    WebElement draggableElement1;
+
+    @FindBy(id = "draggable2")
+    WebElement draggableElement2;
+
+    @FindBy(id = "draggable3")
+    WebElement draggableElement3;
+
+    @FindBy(id = "draggable5")
+    WebElement draggableElement5;
 
     @FindBy(xpath = "//div/ul/li[1]/span[2]")
     private WebElement startLabel;
@@ -22,9 +31,13 @@ public class Draggable extends InteractionBase{
     @FindBy (xpath = "//li[@class='ui-state-highlight ui-draggable ui-draggable-handle ui-sortable-helper']")
     private WebElement draggableCopy;
 
+    public Draggable(WebDriver driver) {
+        super(driver);
+    }
+
 
     public Draggable dra1DefaultFunctionality(int xOffset, int yOffset){
-        driver.switchTo().frame(0);
+        switchWidget(1);
         try {
             dragElementAndTakeScreenshot(draggableElement1,xOffset,yOffset);
         } catch (MoveTargetOutOfBoundsException e){
@@ -69,6 +82,18 @@ public class Draggable extends InteractionBase{
         dragElementAndTakeScreenshot(draggableCopy, 0, 50);
         driver.switchTo().defaultContent();
         return this;
+    }
+
+    void dragElementAndTakeScreenshot(WebElement element, int xOffset, int yOffset) {
+        helper.fluentWaitForElement(element);
+        actions.dragAndDropBy(element,xOffset,yOffset).build().perform();
+        helper.takeScreenshot();
+    }
+
+    void dragElementAndTakeScreenshot(WebElement element,WebElement target) {
+        helper.fluentWaitForElement(element);
+        actions.dragAndDrop(element, target).build().perform();
+        helper.takeScreenshot();
     }
 
 }

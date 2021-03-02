@@ -22,7 +22,8 @@ public class InteractionPageTest extends Base {
         Selectable selectableInteraction = new Selectable(driver);
 
         draggableInteraction.logIn();
-        draggableInteraction.openWidget(1);
+
+        draggableInteraction.openWidget(2,1);
         draggableInteraction.dra1DefaultFunctionality(430,300)
                 .dra1DefaultFunctionality(430,-300)
                 .dra1DefaultFunctionality(-430,150)
@@ -32,16 +33,16 @@ public class InteractionPageTest extends Base {
                 .dra3Evenets(200,-300)
                 .dra3Evenets(-300,100);
 
-        draggableInteraction.openWidget(2);
+        draggableInteraction.openWidget(2,2);
         droppableInteraction.droDefaultFunctionality();
         targetElementText = droppableInteraction.droAccept();
         Assert.assertEquals(targetElementText.get(0), "accept: '#draggable'");
         Assert.assertEquals(targetElementText.get(1), "Dropped!");
 
-        draggableInteraction.openWidget(3);
+        draggableInteraction.openWidget(2,3);
         resizableInteraction.resDefaultFunctionality(200,200);
 
-        draggableInteraction.openWidget(4);
+        draggableInteraction.openWidget(2,4);
         selectableInteraction.selDefaultFunctionality()
                 .selDisplayAsGrid();
         selectResultsText = selectableInteraction.selSerialize(0,5);

@@ -3,9 +3,11 @@ package pages.interactionPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.Base;
+
 import java.util.List;
 
-public class Selectable extends InteractionBase {
+public class Selectable extends Base {
 
     String selectResultsText;
 
@@ -20,7 +22,7 @@ public class Selectable extends InteractionBase {
     }
 
     public Selectable selDefaultFunctionality() {
-        driver.switchTo().frame(0);
+        switchWidget(1);
         for (WebElement listSelectableElement : listSelectableElements) {
             listSelectableElement.click();
             helper.takeScreenshot();

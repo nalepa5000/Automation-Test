@@ -3,7 +3,6 @@ package helper;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -39,6 +38,7 @@ public class Helper {
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.visibilityOf(webElement));
     }
+
 
     public void fluentWaitForElementClicable(WebElement webElement) {
         FluentWait<WebDriver> wait = new FluentWait<>(driver);
@@ -91,6 +91,7 @@ public class Helper {
                 result = true;
                 break;
             } catch (StaleElementReferenceException e) {
+                System.out.println(e.fillInStackTrace());
             }
             attempts++;
         }

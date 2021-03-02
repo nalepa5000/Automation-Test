@@ -7,11 +7,8 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomePage {
+public class HomePage extends Base {
 
-    WebDriver driver;
-    Helper helper;
-    JavascriptExecutor executor;
     List <String> overlapNames;
     List <Integer> overlapWidgets;
 
@@ -43,23 +40,9 @@ public class HomePage {
     List<WebElement> widgetBoxes;
 
     public HomePage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-        this.helper = new Helper(driver);
-        this.executor = (JavascriptExecutor) driver;
+        super(driver);
         this.overlapNames = new ArrayList<>();
         this.overlapWidgets = new ArrayList<>();
-    }
-
-    public HomePage logIn() throws InterruptedException {
-        helper.fluentWaitForElement(signInButton1);
-        signInButton1.click();
-        helper.fluentWaitForElement(userNameInput);
-        userNameInput.sendKeys("knalepa");
-        passwordInput.sendKeys("Darnok321.");
-        signInButton2.click();
-        Thread.sleep(3000);
-        return this;
     }
 
     public String getPhoneNumber() {
@@ -82,8 +65,6 @@ public class HomePage {
         skypeText = skype.getText();
         return skypeText;
     }
-
-
 
     public List<String> overlapNames(){
         String name;
