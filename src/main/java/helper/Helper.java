@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.time.Duration;
 import java.time.LocalTime;
@@ -37,6 +38,16 @@ public class Helper {
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.visibilityOf(webElement));
+    }
+
+    public void fluentWaitForElementClicable(WebElement webElement) {
+        FluentWait<WebDriver> wait = new FluentWait<>(driver);
+        wait.withTimeout(Duration.ofSeconds(10L))
+                .pollingEvery(Duration.ofMillis(1000))
+                .ignoring(NoSuchElementException.class)
+                .ignoring(StaleElementReferenceException.class)
+                .ignoring(InvocationTargetException.class)
+                .until(ExpectedConditions.elementToBeClickable(webElement));
     }
 
     public void fluentWaitForElement(By locator) {

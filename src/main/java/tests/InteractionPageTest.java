@@ -32,16 +32,16 @@ public class InteractionPageTest extends Base {
                 .dra3Evenets(200,-300)
                 .dra3Evenets(-300,100);
 
-        droppableInteraction.openWidget(2);
+        draggableInteraction.openWidget(2);
         droppableInteraction.droDefaultFunctionality();
         targetElementText = droppableInteraction.droAccept();
         Assert.assertEquals(targetElementText.get(0), "accept: '#draggable'");
         Assert.assertEquals(targetElementText.get(1), "Dropped!");
 
-        resizableInteraction.openWidget(3);
+        draggableInteraction.openWidget(3);
         resizableInteraction.resDefaultFunctionality(200,200);
 
-        selectableInteraction.openWidget(4);
+        draggableInteraction.openWidget(4);
         selectableInteraction.selDefaultFunctionality()
                 .selDisplayAsGrid();
         selectResultsText = selectableInteraction.selSerialize(0,5);
