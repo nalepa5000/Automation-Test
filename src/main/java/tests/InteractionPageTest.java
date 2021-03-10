@@ -29,9 +29,9 @@ public class InteractionPageTest extends Base {
                 .dra1DefaultFunctionality(-430,150)
                 .dra2ConstrainMovement(0,300, 800,0,
                                         780,30,0,20)
-                .dra3Evenets(430,300)
-                .dra3Evenets(200,-300)
-                .dra3Evenets(-300,100);
+                .dra3Events(430,300)
+                .dra3Events(200,-300)
+                .dra3Events(-300,100);
 
         draggableInteraction.openWidget(2,2);
         droppableInteraction.droDefaultFunctionality();

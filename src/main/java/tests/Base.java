@@ -27,8 +27,10 @@ public class Base {
         driver.quit();
     }
 
-    @AfterMethod
+    /*@AfterMethod
     public void switchToDefault(){
         driver.switchTo().defaultContent();
     }
+
+     */
 }

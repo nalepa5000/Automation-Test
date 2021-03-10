@@ -62,7 +62,7 @@ public class Draggable extends Base {
         return this;
     }
 
-    public Draggable dra3Evenets(int xOffset, int yOffset) {
+    public Draggable dra3Events(int xOffset, int yOffset) {
         switchWidget(4);
         try {
             dragElementAndTakeScreenshot(draggableElement1,xOffset,yOffset);
@@ -84,15 +84,9 @@ public class Draggable extends Base {
         return this;
     }
 
-    void dragElementAndTakeScreenshot(WebElement element, int xOffset, int yOffset) {
+    private void dragElementAndTakeScreenshot(WebElement element, int xOffset, int yOffset) {
         helper.fluentWaitForElement(element);
         actions.dragAndDropBy(element,xOffset,yOffset).build().perform();
-        helper.takeScreenshot();
-    }
-
-    void dragElementAndTakeScreenshot(WebElement element,WebElement target) {
-        helper.fluentWaitForElement(element);
-        actions.dragAndDrop(element, target).build().perform();
         helper.takeScreenshot();
     }
 

@@ -43,13 +43,7 @@ public class Droppable extends Base {
         return listDroppableElements;
     }
 
-    void dragElementAndTakeScreenshot(WebElement element, int xOffset, int yOffset) {
-        helper.fluentWaitForElement(element);
-        actions.dragAndDropBy(element,xOffset,yOffset).build().perform();
-        helper.takeScreenshot();
-    }
-
-    void dragElementAndTakeScreenshot(WebElement element,WebElement target) {
+    private void dragElementAndTakeScreenshot(WebElement element,WebElement target) {
         helper.fluentWaitForElement(element);
         actions.dragAndDrop(element, target).build().perform();
         helper.takeScreenshot();
