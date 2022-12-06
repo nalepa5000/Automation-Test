@@ -9,8 +9,9 @@ import org.openqa.selenium.support.ui.Select;
 import java.io.File;
 import java.util.List;
 
-public class RegistrationPage extends Base {
+public class RegistrationPage {
 
+    WebDriver driver;
     Select daySelect, monthSelect, yearSelect, countrySelect;
 
     @FindBys({
@@ -26,7 +27,7 @@ public class RegistrationPage extends Base {
     WebElement imageUploadButton;
 
     public RegistrationPage(WebDriver driver) {
-        super(driver);
+        this.driver = driver;
     }
 
     public RegistrationPage setName(String name) {

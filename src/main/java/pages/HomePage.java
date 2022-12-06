@@ -7,10 +7,11 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomePage extends Base {
+public class HomePage {
 
     List <String> overlapNames;
     List <Integer> overlapWidgets;
+    WebDriver driver;
 
     @FindBy(xpath = "//h1[text()='Interaction')")
     WebElement header1;
@@ -40,7 +41,7 @@ public class HomePage extends Base {
     List<WebElement> widgetBoxes;
 
     public HomePage(WebDriver driver) {
-        super(driver);
+        this.driver = driver;
         this.overlapNames = new ArrayList<>();
         this.overlapWidgets = new ArrayList<>();
     }
